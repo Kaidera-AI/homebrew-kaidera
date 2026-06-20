@@ -1,12 +1,12 @@
 {
-  "name": "@engen-ai/engenos",
-  "version": "0.1.144",
+  "name": "@engenai/engenos",
+  "version": "0.1.150",
   "description": "EnGen OS — EnGenAI local-deployment app (console + Cortex + autonomy runtime). npm launcher; the product is Python + Docker.",
   "bin": { "engenos": "bin/cli.js" },
   "engines": { "node": ">=18" },
   "license": "SEE LICENSE IN LICENSE",
   "homepage": "https://github.com/EnGen-AI/engenos",
   "repository": { "type": "git", "url": "github:EnGen-AI/homebrew-engenos" },
-  "files": ["bin"],
+  "files": ["bin", "README.md", "LICENSE"],
   "keywords": ["engenai", "engenos", "ai", "agents", "cortex"]
 }
