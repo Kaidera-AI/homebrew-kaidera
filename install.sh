@@ -3,7 +3,7 @@
 # installer. Usage:  curl -fsSL https://raw.githubusercontent.com/EnGen-AI/homebrew-engenos/main/install.sh | bash
 set -euo pipefail
 
-VERSION="${ENGENOS_VERSION:-0.1.149}"
+VERSION="${ENGENOS_VERSION:-0.1.150}"
 DEST="${ENGENOS_HOME:-$HOME/.engenos}"
 BASE="https://github.com/EnGen-AI/homebrew-engenos/releases/download/v${VERSION}"
 TARBALL="engenos-${VERSION}.tar.gz"
