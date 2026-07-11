@@ -1,9 +1,10 @@
-# EnGen OS — install & upgrade
+# Kaidera OS - install and upgrade
 
-Public distribution for **EnGen OS** (the EnGenAI local-deployment app: native console +
-Cortex memory + autonomy runtime). The source is private (`EnGen-AI/engenos`); this repo
+Public distribution for **Kaidera OS** (the Kaidera local-deployment app: native console +
+Cortex memory + autonomy runtime). The source is private (`Kaidera-AI/kaideraos`); this repo
 hosts the **public installable artifact** + the brew/npm/curl front doors. Control is a
-runtime **license key** (`ENGENOS_LICENSE_KEY`), not download-gating.
+runtime **license key** (`ENGENOS_LICENSE_KEY`, retained as a compatibility identifier),
+not download-gating.
 
 > Requires **Docker** (for the Cortex stack) and **Python 3.12+**. macOS + Linux.
 
@@ -24,7 +25,7 @@ engenos install
 
 **curl**
 ```sh
-curl -fsSL https://raw.githubusercontent.com/EnGen-AI/homebrew-engenos/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Kaidera-AI/homebrew-kaidera/main/install.sh | bash
 ```
 
 All three land the **same** product and the same `engenos` CLI. The curl + brew paths
@@ -55,4 +56,4 @@ engenos version
 
 ## License
 
-Proprietary — © EnGenAI. Use requires a valid `ENGENOS_LICENSE_KEY`.
+Proprietary - Copyright Kaidera. Use requires a valid `ENGENOS_LICENSE_KEY`.
