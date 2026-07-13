@@ -2,7 +2,6 @@ class KaideraOs < Formula
   desc "Local AI-worker platform with Cortex memory"
   homepage "https://github.com/Kaidera-AI/homebrew-kaidera"
   url "https://github.com/Kaidera-AI/homebrew-kaidera/releases/download/v0.1.231/kaidera-os-v0.1.231.tar.gz"
-  version "0.1.231"
   sha256 "e257680c5a3997d8192af0eab7eeb384b84be9fc5c62369bbbd6c5bfba1073eb"
 
   depends_on "python@3.12"
