@@ -12,7 +12,7 @@
   "homepage": "https://github.com/Kaidera-AI/homebrew-kaidera",
   "repository": {
     "type": "git",
-    "url": "github:Kaidera-AI/homebrew-kaidera"
+    "url": "git+https://github.com/Kaidera-AI/homebrew-kaidera.git"
   },
   "files": [
     "bin",
