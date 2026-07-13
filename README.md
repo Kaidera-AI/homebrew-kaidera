@@ -1,59 +1,41 @@
-# Kaidera OS - install and upgrade
+# Kaidera OS distribution
 
-Public distribution for **Kaidera OS** (the Kaidera local-deployment app: native console +
-Cortex memory + autonomy runtime). The source is private (`Kaidera-AI/kaideraos`); this repo
-hosts the **public installable artifact** + the brew/npm/curl front doors. Control is a
-runtime **license key** (`ENGENOS_LICENSE_KEY`, retained as a compatibility identifier),
-not download-gating.
+Public Homebrew, npm, and curl entry points for **Kaidera OS**. Every channel installs
+the same signed `v0.1.231` source artifact and the `kaidera-os` CLI.
 
-> Requires **Docker** (for the Cortex stack) and **Python 3.12+**. macOS + Linux.
+Requires Docker and Python 3.12 or newer. macOS and Linux are supported.
 
-## Install — pick one
+## Homebrew
 
-**Homebrew** (macOS + Linuxbrew)
 ```sh
-brew install engen-ai/engenos/engenos
-engenos install      # bootstrap Cortex + app-DB + native console
-engenos start
+brew install kaidera-ai/kaidera/kaidera-os
+kaidera-os install
+kaidera-os start
 ```
 
-**npm**
+## npm
+
 ```sh
-npm i -g @engenai/engenos
-engenos install
+npm install --global @kaidera/kaidera-os
+kaidera-os install
 ```
 
-**curl**
+## curl
+
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Kaidera-AI/homebrew-kaidera/main/install.sh | bash
 ```
 
-All three land the **same** product and the same `engenos` CLI. The curl + brew paths
-**checksum-verify** the release tarball before installing (a release becomes the live app).
+The curl and npm launchers verify the release SHA-256 before extracting. Homebrew
+verifies the same digest from the formula. Configure providers and licensing in the
+Kaidera OS console; the license environment key is `KAIDERA_OS_LICENSE_KEY`.
 
-## Upgrade — non-disruptive
-
-`engenos upgrade` swaps the console (app + SPA) and restarts only that service in ~2s — the
-Cortex containers and your data are never touched (a console-only release never restarts
-Cortex; container images are pulled only when their pinned digest changes).
+## Upgrade
 
 ```sh
-brew update && brew upgrade engenos     # Homebrew
-npm update -g @engenai/engenos         # npm
-engenos upgrade                         # direct (any install method)
+brew update && brew upgrade kaidera-os
+npm update --global @kaidera/kaidera-os
 ```
 
-Rollback is automatic if the new build fails its health check.
-
-## CLI
-
-```
-engenos install            first-time bootstrap (deps → Cortex compose → console + first-run)
-engenos upgrade [--sha256] swap in a new release (checksum-pinned), migrate, restart, rollback-on-fail
-engenos start | stop | restart | status
-engenos version
-```
-
-## License
-
-Proprietary - Copyright Kaidera. Use requires a valid `ENGENOS_LICENSE_KEY`.
+The runtime keeps Cortex data in persistent storage while the application payload is
+updated.

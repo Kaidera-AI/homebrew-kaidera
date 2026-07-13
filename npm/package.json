@@ -1,12 +1,28 @@
 {
-  "name": "@engenai/engenos",
-  "version": "0.1.150",
-  "description": "EnGen OS — EnGenAI local-deployment app (console + Cortex + autonomy runtime). npm launcher; the product is Python + Docker.",
-  "bin": { "engenos": "bin/cli.js" },
-  "engines": { "node": ">=18" },
+  "name": "@kaidera/kaidera-os",
+  "version": "0.1.231",
+  "description": "Kaidera OS launcher for the local AI-worker platform and Cortex runtime.",
+  "bin": {
+    "kaidera-os": "bin/cli.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "license": "SEE LICENSE IN LICENSE",
-  "homepage": "https://github.com/EnGen-AI/engenos",
-  "repository": { "type": "git", "url": "github:EnGen-AI/homebrew-engenos" },
-  "files": ["bin", "README.md", "LICENSE"],
-  "keywords": ["engenai", "engenos", "ai", "agents", "cortex"]
+  "homepage": "https://github.com/Kaidera-AI/homebrew-kaidera",
+  "repository": {
+    "type": "git",
+    "url": "github:Kaidera-AI/homebrew-kaidera"
+  },
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "kaidera",
+    "ai",
+    "agents",
+    "cortex"
+  ]
 }
