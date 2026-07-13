@@ -15,14 +15,13 @@ kaidera-os start
 
 ## npm
 
-Registry publication is pending activation of the `@kaidera` npm organization for
-the release account. The package is built and clean-install tested at `0.1.231`; once
-the scope is available, install it with:
-
 ```sh
 npm install --global @kaidera/kaidera-os
 kaidera-os install
 ```
+
+Package releases are published from GitHub Actions through npm trusted publishing;
+the release workflow does not require a long-lived npm token.
 
 ## curl
 

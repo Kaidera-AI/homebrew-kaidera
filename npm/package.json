@@ -14,6 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/Kaidera-AI/homebrew-kaidera.git"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "files": [
     "bin",
     "README.md",
