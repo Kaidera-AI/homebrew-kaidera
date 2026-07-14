@@ -1,38 +1,30 @@
-# Kaidera OS distribution
+# Kaidera Homebrew Tap
 
-Public installers, package launchers, and signed releases for
-[Kaidera OS](https://github.com/Kaidera-AI/kaidera-os), the open-source local
-control plane for AI worker teams powered by Cortex.
+Public delivery metadata for the open-source and commercial editions of
+[Kaidera OS](https://kaidera.ai/downloads/kaidera-os).
 
-**[Download for macOS](https://kaidera.ai/downloads/kaidera-os/macos)** |
-**[Browse the source](https://github.com/Kaidera-AI/kaidera-os)** |
+**[Open-source code](https://github.com/Kaidera-AI/kaidera-os)** |
+**[Commercial downloads](https://kaidera.ai/downloads/kaidera-os)** |
 **[Documentation](https://docs.kaidera.ai)** |
-**[Contribute](CONTRIBUTING.md)** |
-**[Enterprise](https://kaidera.ai/for-enterprise)**
+**[Contribute](CONTRIBUTING.md)**
 
-Kaidera OS connects project workspaces, AI harnesses, model providers, and
-**Cortex** so AI workers can plan, execute, review, and resume work without losing
-project context. This repository delivers the same versioned runtime through
-Homebrew, npm, curl, and signed macOS disk images.
+Kaidera OS connects project workspaces, AI harnesses, Kaidera Manifold, and
+**Cortex** so AI workers can plan, execute, review, and resume work with durable
+project context. Cortex is included and permanently remains named Cortex.
 
-## Install
+## Editions
 
-Kaidera OS requires Docker and Python 3.12 or newer. The command-line channels
-support macOS and Linux.
+- **Open source:** `kaidera-os`, from `Kaidera-AI/kaidera-os`; AGPLv3,
+  without warranty or liability.
+- **Commercial server/runtime:** `kaidera-os-commercial`, from `kaidera.ai`;
+  nine-day trial, then a signed license.
+- **Commercial macOS operator:** `kaidera-os-commercial-operator`, from
+  `kaidera.ai`; controls the commercial runtime.
 
-### macOS
+This tap contains formulae, casks, launchers, checksums, and release workflow
+documentation. It contains no commercial product source or private credentials.
 
-Download the signed and notarized installer from the
-[Kaidera OS macOS page](https://kaidera.ai/downloads/kaidera-os/macos).
-
-- [Kaidera OS Console DMG](https://github.com/Kaidera-AI/homebrew-kaidera/releases/download/v0.1.231/kaidera-os-console-v0.1.231.dmg)
-- [Optional Kaidera OS Operator DMG](https://github.com/Kaidera-AI/homebrew-kaidera/releases/download/v0.1.231/kaidera-os-operator-v0.1.231.dmg)
-
-Install the Console first. It contains the full runtime and requires macOS 14 or
-newer, Docker, and Python 3. The optional Operator is a native menu-bar controller
-for an existing installation. Release `v0.1.231` is validated on Apple Silicon.
-
-### Homebrew
+## Open-Source Install
 
 ```sh
 brew install kaidera-ai/kaidera/kaidera-os
@@ -40,83 +32,77 @@ kaidera-os install
 kaidera-os start
 ```
 
-### npm
+The open-source edition is also available through npm and curl:
 
 ```sh
 npm install --global @kaidera/kaidera-os
 kaidera-os install
-```
 
-### curl
-
-```sh
 repo=Kaidera-AI/homebrew-kaidera
 curl -fsSL "https://raw.githubusercontent.com/$repo/main/install.sh" | bash
 ```
 
-The curl and npm launchers verify the release SHA-256 before extracting. Homebrew
-verifies the same digest from the formula. npm releases use GitHub OIDC trusted
-publishing instead of a long-lived registry token.
+The open-source product is Manifold-only. It has no commercial trial or license
+activation runtime and contains no direct-provider implementation. A supported commercial
+edition is available from `sales@kaidera.ai`.
 
-## What gets installed
+## Commercial Install
 
-```mermaid
-flowchart LR
-    Channels[Homebrew / npm / curl / DMG] --> Runtime[Kaidera OS runtime]
-    Runtime --> Console[Operator console]
-    Runtime --> Workers[Worker orchestration]
-    Workers --> Manifold[Kaidera Manifold]
-    Workers <--> Cortex[Cortex memory and coordination]
-    Workers <--> Projects[Local project workspaces]
-```
-
-The packaged public edition exposes the Kaidera Manifold provider surface. A
-source checkout exposes the complete local provider catalogue for development and
-testing. **Cortex remains Cortex:** it is the permanent memory and coordination
-component included with every Kaidera OS distribution.
-
-Read [How Kaidera OS works](docs/HOW_IT_WORKS.md) for the worker lifecycle,
-project boundaries, provider discovery, and release model.
-
-## Source and contributions
-
-Runtime development happens in the public
-[`Kaidera-AI/kaidera-os`](https://github.com/Kaidera-AI/kaidera-os) repository.
-This repository owns distribution concerns: installers, the Homebrew formula, npm
-launcher, signed release assets, and channel documentation.
-
-Bug reports, focused fixes, tests, documentation, accessibility improvements, and
-portable installer enhancements are welcome. See [Contributing](CONTRIBUTING.md)
-before opening an issue or pull request. Maintainers can use the
-[community collaboration guide](docs/MAINTAINER_GUIDE.md) for collaborator access,
-review, merge, and release practices.
-
-## Upgrade
+The commercial formula is published only after the matching website archive is
+live and checksum-verified:
 
 ```sh
-brew update && brew upgrade kaidera-os
+brew install kaidera-ai/kaidera/kaidera-os-commercial
+kaidera-os-commercial install
+kaidera-os-commercial start
+```
+
+On macOS, the optional menu-bar controller can then be installed with:
+
+```sh
+brew install --cask kaidera-ai/kaidera/kaidera-os-commercial-operator
+```
+
+The full signed and notarized Console DMG remains available directly from the
+[Kaidera OS macOS page](https://kaidera.ai/downloads/kaidera-os/macos#install).
+Commercial artifacts are hosted by `kaidera.ai`, not GitHub, and include a
+nine-day trial. Continued use requires a signed license.
+
+Commercial formula/cask files do not appear in the tap until real artifacts are
+published. This prevents Homebrew from advertising an install command backed by
+a missing or mutable URL.
+
+## Channel Ownership
+
+- [`Kaidera-AI/kaidera-os`](https://github.com/Kaidera-AI/kaidera-os)
+  owns the AGPL source and open-source release payload.
+- [`Kaidera-AI/kaideraos`](https://github.com/Kaidera-AI/kaideraos)
+  is the private internal/commercial source repository.
+- This repository owns the public Homebrew tap plus the open-source npm/curl
+  launchers.
+- [`kaidera.ai`](https://kaidera.ai/downloads/kaidera-os) owns commercial
+  archives and macOS downloads.
+
+## Updates
+
+```sh
+brew update
+brew upgrade kaidera-os
+brew upgrade kaidera-os-commercial
 npm update --global @kaidera/kaidera-os
 ```
 
-The runtime keeps Cortex data in persistent storage while updating the application
-payload.
+## Contributing
 
-## Kaidera AI
-
-Kaidera AI is the enterprise platform for designing, governing, and operating AI
-worker organizations. The managed service adds enterprise identity, governed
-workspaces, Manifold model routing, operational controls, and implementation
-support around Kaidera OS and Cortex.
-
-- [Kaidera AI](https://kaidera.ai)
-- [Enterprise service](https://kaidera.ai/for-enterprise)
-- [Technology overview](https://kaidera.ai/technology)
-- [Documentation](https://docs.kaidera.ai)
-- [Kaidera AI on GitHub](https://github.com/Kaidera-AI)
+Bug reports, focused fixes, tests, documentation, accessibility improvements,
+and portable installer enhancements are welcome. See [Contributing](CONTRIBUTING.md)
+and the [maintainer guide](docs/MAINTAINER_GUIDE.md).
 
 ## License
 
-The source in this repository is licensed under the
-[GNU Affero General Public License v3.0 only](LICENSE). Contributions are accepted
-under the same license. Kaidera names and logos are not granted for use by the
-software license; see [`NOTICE`](NOTICE).
+The open-source material in this repository is licensed under the
+[GNU Affero General Public License v3.0 only](LICENSE) and is provided without
+warranty or liability. Contributions are accepted under the same license.
+Kaidera names and logos are not granted for use by the software license; see
+[`NOTICE`](NOTICE). Commercial licensing and support are available from
+`sales@kaidera.ai`.

@@ -1,0 +1,33 @@
+class KaideraOsCommercial < Formula
+  desc "Licensed Kaidera OS runtime with a nine-day commercial trial"
+  homepage "https://kaidera.ai/downloads/kaidera-os"
+  url "@ARTIFACT_URL@"
+  version "@VERSION@"
+  sha256 "@SHA256@"
+
+  depends_on "python@3.12"
+
+  def install
+    libexec.install Dir["*"]
+    (bin/"kaidera-os-commercial").write <<~SH
+      #!/bin/bash
+      exec "#{libexec}/local-cortex/console/scripts/kaidera-os" "$@"
+    SH
+    chmod 0755, bin/"kaidera-os-commercial"
+  end
+
+  def caveats
+    <<~EOS
+      Kaidera OS Commercial is installed. Next:
+        kaidera-os-commercial install
+        kaidera-os-commercial start
+
+      The commercial trial lasts nine days from installation. A signed license
+      is required afterward. Contact sales@kaidera.ai for licensing and support.
+    EOS
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/kaidera-os-commercial version")
+  end
+end

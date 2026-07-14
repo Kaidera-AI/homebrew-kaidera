@@ -12,10 +12,10 @@
   "homepage": "https://kaidera.ai/downloads/kaidera-os",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kaidera-AI/homebrew-kaidera.git"
+    "url": "git+https://github.com/Kaidera-AI/kaidera-os.git"
   },
   "bugs": {
-    "url": "https://github.com/Kaidera-AI/homebrew-kaidera/issues"
+    "url": "https://github.com/Kaidera-AI/kaidera-os/issues"
   },
   "publishConfig": {
     "access": "public",

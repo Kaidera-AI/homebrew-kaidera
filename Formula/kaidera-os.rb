@@ -21,9 +21,9 @@ class KaideraOs < Formula
         kaidera-os install
         kaidera-os start
 
-      Docker is required for the Cortex stack. Configure providers and licensing
-      from the console after installation. The license environment key is
-      KAIDERA_OS_LICENSE_KEY.
+      Docker is required for the Cortex stack. This is the AGPL open-source,
+      Manifold-only edition; it has no commercial trial or license activation.
+      Contact sales@kaidera.ai for the supported commercial edition.
     EOS
   end
 

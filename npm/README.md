@@ -10,7 +10,7 @@ kaidera-os install
 ```
 
 - [Kaidera OS source](https://github.com/Kaidera-AI/kaidera-os)
-- [Installation and releases](https://github.com/Kaidera-AI/homebrew-kaidera)
-- [macOS download page](https://kaidera.ai/downloads/kaidera-os/macos)
+- [Open-source releases](https://github.com/Kaidera-AI/kaidera-os/releases)
+- [Commercial downloads](https://kaidera.ai/downloads/kaidera-os)
 
 Licensed under the GNU Affero General Public License v3.0 only.

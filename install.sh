@@ -5,7 +5,14 @@ set -euo pipefail
 
 VERSION="${KAIDERA_OS_VERSION:-0.1.231}"
 DEST="${KAIDERA_OS_HOME:-$HOME/kaidera-os}"
-BASE="https://github.com/Kaidera-AI/homebrew-kaidera/releases/download/v${VERSION}"
+[[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+  || { echo "invalid Kaidera OS version: $VERSION" >&2; exit 1; }
+if [ "$VERSION" = "0.1.231" ]; then
+  RELEASE_REPO="Kaidera-AI/homebrew-kaidera"
+else
+  RELEASE_REPO="Kaidera-AI/kaidera-os"
+fi
+BASE="https://github.com/$RELEASE_REPO/releases/download/v${VERSION}"
 TARBALL="kaidera-os-v${VERSION}.tar.gz"
 
 echo "Kaidera OS ${VERSION} -> ${DEST}"

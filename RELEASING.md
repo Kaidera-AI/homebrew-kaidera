@@ -1,48 +1,74 @@
-# Releasing distribution channels
+# Releasing Distribution Channels
 
-`@kaidera/kaidera-os` publishes through npm trusted publishing. GitHub Actions
-uses a short-lived OIDC credential; no npm write token belongs in GitHub secrets.
+## Channel Invariants
 
-## npm trusted publisher
+- `kaidera-os` is the AGPL open-source formula. Its runtime artifact comes from
+  `Kaidera-AI/kaidera-os`.
+- `kaidera-os-commercial` is the licensed server/runtime formula. Its immutable
+  archive comes from `https://kaidera.ai/downloads/kaidera-os/server/`.
+- `kaidera-os-commercial-operator` is the optional macOS controller cask. Its
+  signed/notarized DMG comes from `https://kaidera.ai/downloads/kaidera-os/macos/`.
+- Commercial source, license signing keys, Apple signing credentials, and
+  customer data never enter this repository.
+- Do not add a commercial formula or cask before its URL is anonymously
+  downloadable and its declared SHA-256 matches.
 
-Configured on 2026-07-14 for `@kaidera/kaidera-os`:
+## Open-Source Release
 
-- Provider: GitHub Actions
+1. Confirm the exact reviewed source commit in `Kaidera-AI/kaidera-os`.
+2. Run that repository's source-boundary, clean-install, and release checks.
+3. Publish an immutable `v<version>` open-source artifact from that commit.
+4. Update `Formula/kaidera-os.rb`, `install.sh`, and `npm/package.json` together.
+5. Run a source install on a clean host:
+
+   ```sh
+   brew install --build-from-source kaidera-ai/kaidera/kaidera-os
+   ```
+
+6. Commit and push the channel update, then publish the matching npm version.
+
+`@kaidera/kaidera-os` uses npm trusted publishing with GitHub Actions OIDC:
+
 - Organization: `Kaidera-AI`
 - Repository: `homebrew-kaidera`
-- Workflow filename: `publish-npm.yml`
+- Workflow: `publish-npm.yml`
 - Allowed action: `npm publish`
-- Trusted publisher ID: `163e7b7c-d5cc-43e5-a5a9-6a814ea304f4`
 
-After an OIDC release succeeds, set Publishing access to **Require two-factor
-authentication and disallow tokens**, then revoke the temporary bypass-2FA token.
+npm versions are immutable. Never reuse a published version.
 
-## Public macOS assets
+## Commercial Release
 
-Runtime source is published in `Kaidera-AI/kaidera-os`, while installable assets
-belong in this distribution repository. Publish these six files to this
-repository's public `v<version>` release:
+Commercial builds happen only in the private `Kaidera-AI/kaideraos` repository.
+After its tests pass:
 
-- `kaidera-os-console-v<version>.dmg`
-- `kaidera-os-console-v<version>.dmg.sha256`
-- `kaidera-os-console-v<version>.dmg.metadata.json`
-- `kaidera-os-operator-v<version>.dmg`
-- `kaidera-os-operator-v<version>.dmg.sha256`
-- `kaidera-os-operator-v<version>.dmg.metadata.json`
+1. Build the signed commercial server archive and website manifest.
+2. Build, Developer ID sign, notarize, and staple the commercial macOS artifacts.
+3. Publish the files and manifests under `kaidera.ai`.
+4. Confirm every artifact is anonymously downloadable over HTTPS.
+5. Generate tap metadata from the live manifests:
 
-Download both public DMGs without GitHub credentials and verify their SHA-256
-values against the sidecars before updating website links.
+```sh
+base=https://kaidera.ai/downloads/kaidera-os
+python3 scripts/promote-commercial.py \
+  --server-manifest "$base/server/latest-server.json" \
+  --operator-manifest "$base/macos/latest-operator-macos.json"
+```
 
-## Release sequence
+1. Review the generated Ruby files and run `brew audit --strict` on both.
+2. Install each channel on a clean supported host; verify trial, activation,
+   expiry, restore, upgrade, and uninstall.
+3. Commit and push the tap metadata only after those checks pass.
 
-1. Confirm the matching source commit is public in `Kaidera-AI/kaidera-os`.
-2. Update `npm/package.json` and all channel metadata to the new version.
-3. Commit and push the complete channel update.
-4. Create and publish `v<version>` from that exact distribution commit.
-5. Upload the runtime archive, source archive, signed macOS DMGs, and sidecars.
-6. Confirm anonymous downloads and SHA-256 verification for every artifact.
-7. Confirm the `Publish npm package` workflow succeeds through OIDC.
-8. Run an unauthenticated clean install of the published npm version.
+The generator verifies edition/channel fields, requires absolute
+`https://kaidera.ai` URLs, downloads each artifact, and confirms the declared
+SHA-256 before writing a formula or cask.
 
-The workflow fails before publication when the release tag and package version do
-not match. npm versions are immutable, so never reuse a published version.
+## Current Hold
+
+Version `0.1.231` remains the current public release. Do not publish a new
+commercial formula/cask or cut a new release until the commercial licensing flow
+has passed end-to-end acceptance. This version predates the repository split and
+remains at its existing `homebrew-kaidera` release URL. The first later
+open-source release moves its archive, checksum, and signature to
+`Kaidera-AI/kaidera-os`; the compatibility branch in the curl/npm launchers can
+be removed after supported installations have upgraded.

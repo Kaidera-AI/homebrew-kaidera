@@ -1,0 +1,22 @@
+cask "kaidera-os-commercial-operator" do
+  version "@VERSION@"
+  sha256 "@SHA256@"
+
+  url "@ARTIFACT_URL@",
+      verified: "kaidera.ai/downloads/kaidera-os/macos/"
+  name "Kaidera OS Commercial Operator"
+  desc "Menu bar controller for a licensed Kaidera OS installation"
+  homepage "https://kaidera.ai/downloads/kaidera-os/macos"
+
+  depends_on macos: ">= :sonoma"
+
+  app "Kaidera OS Operator.app"
+
+  caveats <<~EOS
+    This is the controller app. Install the commercial runtime first:
+      brew install kaidera-ai/kaidera/kaidera-os-commercial
+
+    The runtime includes a nine-day trial. Continued use requires a signed
+    license. Contact sales@kaidera.ai for licensing and support.
+  EOS
+end

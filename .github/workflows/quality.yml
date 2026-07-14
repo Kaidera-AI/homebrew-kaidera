@@ -35,6 +35,10 @@ jobs:
           bash -n install.sh
           shellcheck install.sh
           ruby -c Formula/kaidera-os.rb
+          python3 -m py_compile scripts/promote-commercial.py
+          python3 -m unittest discover -s tests
+          ruby -c Templates/kaidera-os-commercial.rb.in
+          ruby -c Templates/kaidera-os-commercial-operator.rb.in
           node --check npm/bin/cli.js
           cmp LICENSE npm/LICENSE
           (cd npm && npm pack --dry-run --json)
