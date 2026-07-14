@@ -8,3 +8,9 @@ verifies its SHA-256, installs it under `~/kaidera-os`, and delegates to the
 npm install --global @kaidera/kaidera-os
 kaidera-os install
 ```
+
+- [Kaidera OS source](https://github.com/Kaidera-AI/kaidera-os)
+- [Installation and releases](https://github.com/Kaidera-AI/homebrew-kaidera)
+- [macOS download page](https://kaidera.ai/downloads/kaidera-os/macos)
+
+Licensed under the GNU Affero General Public License v3.0 only.

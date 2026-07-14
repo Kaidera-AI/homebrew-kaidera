@@ -8,11 +8,14 @@
   "engines": {
     "node": ">=18"
   },
-  "license": "SEE LICENSE IN LICENSE",
-  "homepage": "https://github.com/Kaidera-AI/homebrew-kaidera",
+  "license": "AGPL-3.0-only",
+  "homepage": "https://kaidera.ai/downloads/kaidera-os",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kaidera-AI/homebrew-kaidera.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kaidera-AI/homebrew-kaidera/issues"
   },
   "publishConfig": {
     "access": "public",

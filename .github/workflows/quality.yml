@@ -1,0 +1,40 @@
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  distribution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Validate documentation
+        run: >-
+          npx --yes markdownlint-cli2
+          README.md
+          CONTRIBUTING.md
+          SECURITY.md
+          RELEASING.md
+          docs/*.md
+          .github/PULL_REQUEST_TEMPLATE.md
+
+      - name: Validate installers and package metadata
+        run: |
+          set -euo pipefail
+          bash -n install.sh
+          shellcheck install.sh
+          ruby -c Formula/kaidera-os.rb
+          node --check npm/bin/cli.js
+          cmp LICENSE npm/LICENSE
+          (cd npm && npm pack --dry-run --json)

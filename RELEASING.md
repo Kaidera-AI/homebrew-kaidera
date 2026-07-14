@@ -19,8 +19,8 @@ authentication and disallow tokens**, then revoke the temporary bypass-2FA token
 
 ## Public macOS assets
 
-The canonical Kaidera OS repository is private. Never use its release URLs on the
-website or another anonymous customer surface. Mirror these six files to this
+Runtime source is published in `Kaidera-AI/kaidera-os`, while installable assets
+belong in this distribution repository. Publish these six files to this
 repository's public `v<version>` release:
 
 - `kaidera-os-console-v<version>.dmg`
@@ -35,13 +35,14 @@ values against the sidecars before updating website links.
 
 ## Release sequence
 
-1. Update `npm/package.json` and all channel metadata to the new version.
-2. Commit and push the complete channel update.
-3. Create and publish `v<version>` from that exact commit.
-4. Upload the signed macOS DMGs and their checksum/metadata sidecars.
-5. Confirm anonymous downloads and SHA-256 verification for both DMGs.
-6. Confirm the `Publish npm package` workflow succeeds through OIDC.
-7. Run an unauthenticated clean install of the published npm version.
+1. Confirm the matching source commit is public in `Kaidera-AI/kaidera-os`.
+2. Update `npm/package.json` and all channel metadata to the new version.
+3. Commit and push the complete channel update.
+4. Create and publish `v<version>` from that exact distribution commit.
+5. Upload the runtime archive, source archive, signed macOS DMGs, and sidecars.
+6. Confirm anonymous downloads and SHA-256 verification for every artifact.
+7. Confirm the `Publish npm package` workflow succeeds through OIDC.
+8. Run an unauthenticated clean install of the published npm version.
 
 The workflow fails before publication when the release tag and package version do
 not match. npm versions are immutable, so never reuse a published version.
