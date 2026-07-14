@@ -3,15 +3,16 @@
 `@kaidera/kaidera-os` publishes through npm trusted publishing. GitHub Actions
 uses a short-lived OIDC credential; no npm write token belongs in GitHub secrets.
 
-## One-time npm configuration
+## npm trusted publisher
 
-In the package settings on npmjs.com, configure this trusted publisher:
+Configured on 2026-07-14 for `@kaidera/kaidera-os`:
 
 - Provider: GitHub Actions
 - Organization: `Kaidera-AI`
 - Repository: `homebrew-kaidera`
 - Workflow filename: `publish-npm.yml`
 - Allowed action: `npm publish`
+- Trusted publisher ID: `163e7b7c-d5cc-43e5-a5a9-6a814ea304f4`
 
 After an OIDC release succeeds, set Publishing access to **Require two-factor
 authentication and disallow tokens**, then revoke the temporary bypass-2FA token.

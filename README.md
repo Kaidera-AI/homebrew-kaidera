@@ -30,9 +30,9 @@ npm install --global @kaidera/kaidera-os
 kaidera-os install
 ```
 
-Future package releases are configured for npm trusted publishing from GitHub
-Actions. Complete the one-time package trust binding in `RELEASING.md` before the
-next release; the workflow itself does not use a long-lived npm token.
+Package releases use npm trusted publishing from GitHub Actions. The trusted
+publisher is bound to this repository's `publish-npm.yml` workflow, which uses a
+short-lived OIDC credential instead of a long-lived npm token.
 
 ## curl
 
