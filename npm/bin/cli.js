@@ -11,8 +11,7 @@ const VERSION = require('../package.json').version
 const HOME = process.env.KAIDERA_OS_HOME || path.join(os.homedir(), 'kaidera-os')
 const CLI = path.join(HOME, 'local-cortex', 'console', 'scripts', 'kaidera-os')
 const VERSION_FILE = path.join(HOME, 'local-cortex', 'console', 'app', 'version.py')
-const RELEASE_REPO =
-  VERSION === '0.1.231' ? 'Kaidera-AI/homebrew-kaidera' : 'Kaidera-AI/kaidera-os'
+const RELEASE_REPO = 'Kaidera-AI/kaidera-os'
 const BASE = `https://github.com/${RELEASE_REPO}/releases/download/v${VERSION}`
 const TARBALL = `kaidera-os-v${VERSION}.tar.gz`
 
