@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -14,6 +15,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class PromoteCommercialTests(unittest.TestCase):
+    def test_npm_provenance_names_the_publishing_repository(self) -> None:
+        package = json.loads(
+            (MODULE_PATH.parents[1] / "npm/package.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            package["repository"]["url"],
+            "git+https://github.com/Kaidera-AI/homebrew-kaidera.git",
+        )
+
     def test_accepts_website_commercial_manifest(self) -> None:
         version, url, digest = MODULE.artifact_fields(
             {
