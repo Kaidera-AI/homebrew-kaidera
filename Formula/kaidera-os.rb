@@ -7,7 +7,10 @@ class KaideraOs < Formula
   depends_on "python@3.12"
 
   def install
-    libexec.install Dir["*"]
+    # Dir["*"] drops dotfiles, and .agents/ is exactly the tree the
+    # installer needs (docker-compose.cortex.yml, the Cortex API, scripts).
+    # Install it explicitly or the bottle cannot deploy anywhere (rehearsal finding 07).
+    libexec.install Dir["*"], Dir[".agents"]
     (bin/"kaidera-os").write <<~SH
       #!/bin/bash
       exec "#{libexec}/local-cortex/console/scripts/kaidera-os" "$@"
